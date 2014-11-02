@@ -20,7 +20,7 @@ Requisitions
 | 1    | Add    |           1024           |      Discrete uniform 256, 512     |         10        |
 | 2    | Delete |           1024           |      Discrete uniform 512, 1024    |          8        |
 | 3    | Find   |           256            | Discrete triangular 256, 512, 1024 |         15        |
-| 4    | Add    |           1024           |        Discrete weighted *         |         30        |
+| 4    | Search |           1024           |        Discrete weighted *         |         30        |
 
 The fourth requisition response size is an weighted discrete distibuted random
 number. It is tabulated below.

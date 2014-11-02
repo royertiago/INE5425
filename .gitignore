@@ -1,2 +1,5 @@
 # Vim temporaries
 .*.swp
+
+# Executable produced
+a.out

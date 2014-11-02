@@ -18,6 +18,13 @@ namespace user {
      * Default values:
      * 10, 8, 15, 30 */
     extern double response_time[4];
+
+    /* Extracts the configurations from the specified file.
+     * Writes to std::cerr three error messages: "absent or inaccessible file",
+     * "unknown variable", or "wrong number format".
+     *
+     * The format shall conform the one described in user_config.md. */
+    void read_configuration( const char * filename );
 }
 
 #endif // USER_CONFIG_H
