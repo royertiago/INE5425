@@ -2,11 +2,18 @@
 # CXX is intended for local compiling; thus, all possible flas are set.
 # WIN32CXX and WIN64CXX are meant for cross-compiling only, so we should
 # not bother with warnings.
+# not bother with warnings.
+#
+# One flag (RWINDOWS) is defined when cross-compiling for Windows; the main
+# purpose is to execute getchar() in main() to prevent the console window to
+# quit before viewing all output in Windows.
+# The name RWINDOWS was chosen to avoid name clashes, because the name WINDOWS
+# seems to be used by some system headers.
 CXX := g++
 CXXFLAGS := -std=c++11 -Wall -Wextra -Werror -g
 WIN32CXX := i686-w64-mingw32-g++
 WIN64CXX := x86_64-w64-mingw32-g++
-WINCXXFLAGS := -std=c++11 -w -static -lgcc -lstdc++ -lpthread
+WINCXXFLAGS := -std=c++11 -w -static -lgcc -lstdc++ -lpthread -DRWINDOWS
 
 # Variable definitions
 SOURCES := $(shell find -name "*.cpp")
