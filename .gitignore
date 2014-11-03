@@ -1,5 +1,12 @@
 # Vim temporaries
 .*.swp
 
-# Executable produced
-a.out
+# Object files
+*.o
+
+# Dependancy files
+*.d
+
+# Executables produced
+modelsim
+modelsim-win??.exe
