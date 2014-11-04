@@ -26,7 +26,7 @@ The fourth requisition response size is an weighted discrete distibuted random
 number. It is tabulated below.
 
 | Size (bytes) | Probability |
-|:............:|:...........:|
+|:------------:|:-----------:|
 |       64     |    20%      |
 |      512     |    30%      |
 |     1024     |    30%      |
