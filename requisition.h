@@ -29,6 +29,10 @@ struct Requisition {
     static unsigned minimum_queue_time;
     static unsigned maximum_queue_time;
     static long unsigned total_queue_time;
+
+    /* Generate a new requisition according to the type; see system_overview.md.
+     * The source pointer is not set. */
+    static Requisition generate_requisition( unsigned type );
 };
 
 #endif // REQUISITION_H

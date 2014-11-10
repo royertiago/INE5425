@@ -6,13 +6,21 @@
 #ifndef NETWORK_H
 #define NETWORK_H
 
+#include <queue>
 #include "event_generator.h"
 #include "requisition.h"
 
 class Network : public EventGenerator {
+    std::queue<Requisition> to_server;
+    std::queue<Requisition> to_client;
 public:
     void send_to_server( Requisition );
     void send_to_client( Requisition );
+
+    virtual ~Network() = default;
+    virtual unsigned int next_event() override;
+    virtual std::string next_event_description() override;
+    virtual bool advance( unsigned microseconds ) override;
 };
 
 Network network;
