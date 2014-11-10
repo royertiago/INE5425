@@ -1,7 +1,6 @@
 # Compiler and flags definitions
-# CXX is intended for local compiling; thus, all possible flas are set.
+# CXX is intended for local compiling; thus, all possible flags are set.
 # WIN32CXX and WIN64CXX are meant for cross-compiling only, so we should
-# not bother with warnings.
 # not bother with warnings.
 #
 # One flag (RWINDOWS) is defined when cross-compiling for Windows; the main
@@ -52,6 +51,8 @@ modelsim-win64.exe: $(SOURCES)
 	$(WIN64CXX) $(WINCXXFLAGS) -o modelsim-win64.exe $(SOURCES)
 
 # Object files
+# This script also rewrites the corresponding .d file, so that whenever an object file
+# needs recompilation, the dependency file is updated.
 $(OBJ): %.o : %.cpp
 	$(CXX) $(CXXFLAGS) $(ILIBS) $(FINCLUDE) -c $< -o $@
 	g++ -std=c++0x -MM $< -MF $*.d -MT "$*.o" $(ILIBS)
