@@ -32,6 +32,13 @@ namespace user {
 
         std::string var; double value;
         while( file >> var ) {
+            if( var == "seed" ) {
+                if(!(file >> user::seed) ) {
+                    std::cerr << "Wrong number format for seed\n";
+                    file.clear();
+                }
+                continue;
+            }
             if( !(file >> value) ) {
                 std::cerr << "Wrong number format for " << var << std::endl;
                 file.clear();

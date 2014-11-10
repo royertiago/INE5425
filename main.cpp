@@ -13,6 +13,7 @@ int main() {
     for( int i = 0; i < 4; i++ )
         printf( "lambda[%i] = %7.2lf, response_time[%i] = %7.2lf\n",
                 i, user::lambda[i], i, user::response_time[i] );
+    printf( "Seed: %u\n", user::seed );
 
 #ifdef RWINDOWS
     std::cout << "\nPress [ENTER] to exit the system...";

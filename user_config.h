@@ -1,6 +1,9 @@
 /* user_config.h
  * Header that centralizes all possible variables configurable by the user.
- * See system_overview.md. */
+ * See system_overview.md.
+ *
+ * All the lambdas and response_times are defined in user_config.cpp;
+ * user::seed is defined in random.cpp. */
 #ifndef USER_CONFIG_H
 #define USER_CONGIG_H
 
@@ -18,6 +21,10 @@ namespace user {
      * Default values:
      * 10, 8, 15, 30 */
     extern double response_time[4];
+
+    /* Seed used in random number generation.
+     * Default: implementation-defined. */
+    extern unsigned int seed;
 
     /* Extracts the configurations from the specified file.
      * Writes to std::cerr three error messages: "absent or inaccessible file",
