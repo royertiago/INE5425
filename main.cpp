@@ -7,13 +7,18 @@
 #endif
 
 #include "user_config.h"
+#include "random.h"
 
 int main() {
     user::read_configuration( "user_config.txt" );
-    for( int i = 0; i < 4; i++ )
-        printf( "lambda[%i] = %7.2lf, response_time[%i] = %7.2lf\n",
-                i, user::lambda[i], i, user::response_time[i] );
+    Random::reset();
     printf( "Seed: %u\n", user::seed );
+
+    printf( "Random numbers - add: %5u, delete %5u, find %5u, search %5u\n",
+            Random::add_response_size(),
+            Random::delete_response_size(),
+            Random::find_response_size(),
+            Random::search_response_size() );
 
 #ifdef RWINDOWS
     std::cout << "\nPress [ENTER] to exit the system...";
