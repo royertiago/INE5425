@@ -2,8 +2,8 @@ Program configuration
 =====================
 
 There are nine values that can be setted by the user:
--   The mean time between the requisitions of the four clients; and
--   The requisition processing time for each type.
+-   The mean time between the requisitions of the four clients;
+-   The requisition processing time for each type; and
 -   The RNG seed.
 
 The first four variables are named lambda1, lambda2, lambda3 and lambda4;
