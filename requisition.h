@@ -31,7 +31,7 @@ struct Requisition {
     static long unsigned total_queue_time;
 
     /* Generate a new requisition according to the type; see system_overview.md.
-     * The source pointer is not set. */
+     * The source pointer is not set; type is indexed by zero. */
     static Requisition generate_requisition( unsigned type );
 };
 

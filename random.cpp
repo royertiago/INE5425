@@ -47,4 +47,19 @@ namespace Random {
             default: return 2048;
         }
     }
+
+    unsigned search_requisition_size() {
+        static std::uniform_int_distribution<unsigned> d( 256, 512 );
+        return d( rng );
+    }
+
+    unsigned next_requisition_type( int * d ) {
+        std::discrete_distribution<unsigned> d( d, d+4 );
+        return d( rng );
+    }
+
+    unsigned next_requisition_time( double lambda ) {
+        std::exponential_distribution<double> d( 1/lambda );
+        return d( rng ) * 1000 + 0.5;
+    }
 }

@@ -30,8 +30,8 @@ int main() {
 
     readkey();
     
-    while( clock::current_time() < time_limit ) {
-        std::cout << clock::advance();
+    while( Clock::current_time() < time_limit ) {
+        std::cout << Clock::advance();
         // TODO: print statistics summary here, after event generation.
 
         if( step_by_step )
