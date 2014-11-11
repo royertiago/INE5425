@@ -15,12 +15,12 @@ the efficiency is between 60% and 80%, uniformly distributed.
 Requisitions
 -----------
 
-| Type |  Name  | Requisition size (bytes) |        Response size (bytes)       | Process time (ms) |
-|-----:|:-------|:------------------------:|:----------------------------------:|:-----------------:|
-| 1    | Add    |           1024           |      Discrete uniform 256, 512     |         10        |
-| 2    | Delete |           1024           |      Discrete uniform 512, 1024    |          8        |
-| 3    | Find   |           256            | Discrete triangular 256, 512, 1024 |         15        |
-| 4    | Search |           1024           |        Discrete weighted *         |         30        |
+| Type |  Name  |  Requisition size (bytes)  |        Response size (bytes)       | Process time (ms) |
+|-----:|:-------|:--------------------------:|:----------------------------------:|:-----------------:|
+| 1    | Add    |           1024             |      Discrete uniform 256, 512     |         10        |
+| 2    | Delete |           1024             |      Discrete uniform 512, 1024    |          8        |
+| 3    | Find   |           256              | Discrete triangular 256, 512, 1024 |         15        |
+| 4    | Search | Discrete Uniform 256, 512  |        Discrete weighted *         |         30        |
 
 The fourth requisition response size is an weighted discrete distibuted random
 number. It is tabulated below.
