@@ -37,7 +37,20 @@ requisition types, and the second can process only the last two.
 
 Clients
 -------
-TODO: add table listing clients and requisitions-per-client distribution
+
+We can specify the arrival rate and distribution by type of requisitions 
+by the different clients as such:
+
+| Client |  Requisition ETA (messages/msec)  |          Requisition distribution          |
+|:------:|:---------------------------------:|:------------------------------------------:|
+| 1      | Exponential 1/λ1                  | Discrete 0.2, 1, 0.35, 2, 0.75, 3, 1.00, 4 |
+| 2      | Exponential 1/λ2                  | Discrete 0.4, 1, 1.00, 2                   |
+| 3      | Exponential 1/λ3                  | Discrete 0.6, 3, 1.00, 4                   |
+| 4      | Exponential 1/λ4                  | Discrete 0.6, 3, 1.00, 4                   |
+
+Where, by default, λ1, λ2, λ3 and λ4 are set to 30, 60, 120 and 120 respectively. 
+These values can be redefined in the 'user_config.txt' file. More information can
+be found on 'user_config.md'.
 
 User-definable parameters
 -------------------------
