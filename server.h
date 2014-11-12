@@ -31,6 +31,6 @@ public:
     virtual std::string advance( unsigned microseconds ) override;
 };
 
-Server processes[2];
+extern Server processes[2];
 
 #endif // SERVER_H

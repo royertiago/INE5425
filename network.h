@@ -23,6 +23,6 @@ public:
     virtual bool advance( unsigned microseconds ) override;
 };
 
-Network network;
+extern Network network;
 
 #endif // NETWORK_H

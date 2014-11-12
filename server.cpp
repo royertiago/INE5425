@@ -5,6 +5,8 @@
 #include "server.h"
 #include "network.h"
 
+Server processes[2];
+
 void Server::process( Requisition req ) {
     queue.push(req);
     req.last_queue_timestamp = Clock::current_time();
