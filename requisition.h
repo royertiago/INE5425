@@ -24,7 +24,7 @@ struct Requisition {
     Client * source;
 
     // Local statistics
-    unsigned total_queue_time;
+    unsigned queue_time;
     unsigned last_queue_timestamp;
 
     // Global statistics

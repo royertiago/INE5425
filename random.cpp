@@ -62,4 +62,9 @@ namespace Random {
         std::exponential_distribution<double> d( 1/lambda );
         return d( rng ) * 1000 + 0.5;
     }
+
+    double network_efficiency() {
+        static std::uniform_real_distribution<double> d( 0.6, 0.8 );
+        return d( rng );
+    }
 }
