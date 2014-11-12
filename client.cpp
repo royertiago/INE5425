@@ -49,7 +49,7 @@ std::string Client::advance( unsigned us ) {
     next_event_time_us -= us;
     if( next_event_time_us != 0 ) return "";
     static char buffer[1024];
-    int end = std::sprintf( buffer, "Sent %6s requisition of size %4d from client %d to network.\n",
+    int end = std::sprintf( buffer, "Sent %6s requisition of size %4d from client %d to network\n",
             next_requisition.type, next_requisition.size, index );
     
     network.send_to_server( next_requisition );

@@ -9,11 +9,17 @@
 #include "requisition.h"
 
 class Server { // server process
-    std::queue<Requisition> requisitions;
-    unsigned int total_queue_time;
-    unsigned int maximum_queue_time;
-    unsigned int occupied_us;
-    unsigned int empty_us;
+    std::queue<Requisition> queue;
+
+    /* weighted_queue_time is the sum of all the queueing times
+     * weighted by the number of requisitions being processed.
+     *
+     * Or can be tought as the sum of all queueing times. */
+    unsigned int wheighted_queue_time = 0;
+
+    unsigned int maximum_queue_time = 0;
+    unsigned int occupied_time_us = 0;
+    unsigned int empty_time_us = 0;
 
 public:
     virtual ~Server() = default;
@@ -22,7 +28,7 @@ public:
 
     virtual unsigned int next_event() override;
     virtual std::string next_event_description() override;
-    virtual bool advance( unsigned microseconds ) override;
+    virtual std::string advance( unsigned microseconds ) override;
 };
 
 Server processes[2];
