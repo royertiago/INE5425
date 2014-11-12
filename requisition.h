@@ -22,6 +22,7 @@ struct Requisition {
     double network_efficiency; // ratio (uniformly distributed in [0.6, 0.8])
     int server_process; // in what process will this requisition be processed?
     Client * source;
+    const char * type; // "add", "delete", "find", "search".
 
     // Local statistics
     unsigned queue_time;

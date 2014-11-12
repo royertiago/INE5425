@@ -49,8 +49,8 @@ by the different clients as such:
 | 4      | Exponential 1/λ4                  | Discrete 0.6, 3, 1.00, 4                   |
 
 Where, by default, λ1, λ2, λ3 and λ4 are set to 30, 60, 120 and 120 respectively. 
-These values can be redefined in the 'user_config.txt' file. More information can
-be found on 'user_config.md'.
+These values can be redefined in the 'user\_config.txt' file. More information can
+be found on 'user\_config.md'.
 
 User-definable parameters
 -------------------------

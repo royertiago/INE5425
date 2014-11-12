@@ -4,7 +4,6 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 
-#include <random>
 #include "event_generator.h"
 #include "requisition.h"
 
@@ -13,14 +12,17 @@ class Client : public EventGenerator {
     int * type_distribution;
     int index;
 
-    unsigned next_event; // microseconds
+    unsigned next_event_time_us; // microseconds
     Requisition next_requisition;
+
+    // Generate the next requisition and requisition times.
+    void generate();
 public:
     Client( double, int *, int );
     virtual ~Client() = default;
     virtual unsigned int next_event() override;
     virtual std::string next_event_description() override;
-    virtual bool advance( unsigned microseconds ) override;
+    virtual std::string advance( unsigned microseconds ) override;
 
     /* Assign the user-defined lambdas to the client array defined
      * below. */
