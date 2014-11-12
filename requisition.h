@@ -12,20 +12,22 @@
 class Client;
 
 struct Requisition {
+    // Global information
     static unsigned alive; // Number of requisitions alive in the program.
     static unsigned count; // Total number of created requisitions
 
-    // requisition data
+    // Requisition data
     unsigned size, response_size; // bytes
     unsigned processing_time; // ms
     double network_efficiency; // ratio (uniformly distributed in [0.6, 0.8])
     int server_process; // in what process will this requisition be processed?
     Client * source;
 
-    // statistics
+    // Local statistics
     unsigned total_queue_time;
     unsigned last_queue_timestamp;
 
+    // Global statistics
     static unsigned minimum_queue_time;
     static unsigned maximum_queue_time;
     static long unsigned total_queue_time;
