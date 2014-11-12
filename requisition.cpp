@@ -2,7 +2,8 @@
  * Implementation of requisition.h
  */
 
- #include "server.h"
+ #include "requisition.h"
+ #include "random.h"
 
  static Requisition generate_requisition( unsigned type ) {
  	Requisition req = new Requisition;
