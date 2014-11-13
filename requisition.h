@@ -22,6 +22,10 @@ struct Requisition {
 
     // statistics
     unsigned creation_timestamp;
+
+    /* Generate a new requisition according to the type; see system_overview.md.
+     * The source pointer is not set. */
+    static Requisition generate_requisition( unsigned type );
 };
 
 #endif // REQUISITION_H

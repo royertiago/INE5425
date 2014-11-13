@@ -6,6 +6,7 @@
 
 #include <random>
 #include "event_generator.h"
+#include "requisition.h"
 
 class Client : public EventGenerator {
     double lambda;
@@ -13,9 +14,10 @@ class Client : public EventGenerator {
     int index;
 
     unsigned next_event; // microseconds
+    Requisition next_requisition;
 public:
     Client( double, int *, int );
-    virtual ~Client() override;
+    virtual ~Client() = default;
     virtual unsigned int next_event() override;
     virtual std::string next_event_description() override;
     virtual bool advance( unsigned microseconds ) override;
