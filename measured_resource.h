@@ -43,6 +43,9 @@ public:
      * If there is no entity in the server, -1llu is returned. */
     long long unsigned next_event() const;
 
+    /* Returns the next requisition to be sent. */
+    Requisition front() const { return queue.front().req; }
+
     // Queue statistics and resource occupancy rate
     int    min_entities()     const { return entities.min();      }
     int    max_entities()     const { return entities.max();      }

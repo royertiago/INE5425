@@ -16,7 +16,7 @@ struct Requisition {
 
     // Requisition data
     unsigned size, response_size; // bytes
-    unsigned processing_time; // ms
+    unsigned processing_time; // microseconds
     double network_efficiency; // ratio (uniformly distributed in [0.6, 0.8])
     int server_process; // in what process will this requisition be processed?
     Client * source;
