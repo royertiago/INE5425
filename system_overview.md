@@ -36,6 +36,10 @@ number. It is tabulated below.
 The first process in the server is able to process only the first two
 requisition types, and the second can process only the last two.
 
+Clients
+-------
+TODO: add table listing clients and requisitions-per-client distribution
+
 User-definable parameters
 -------------------------
 
