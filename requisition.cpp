@@ -1,7 +1,6 @@
 /* requisition.cpp
  * Implementation of requisition.h
  */
-
 #include "clock.h"
 #include "random.h"
 #include "requisition.h"

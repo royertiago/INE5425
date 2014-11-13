@@ -33,8 +33,8 @@ public:
     virtual bool advance( unsigned microseconds ) override;
 }
 
-ServerToClient server_to_client;
-ClientToServer client_to_server;
-measurer response_times;
+extern ServerToClient server_to_client;
+extern ClientToServer client_to_server;
+extern measurer response_times;
 
 #endif // NETWORK_H

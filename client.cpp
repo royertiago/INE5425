@@ -13,7 +13,7 @@ int distributions[4][4] = {
     { 0,  0, 60, 40},
 };
 
-Client Client::clients[4] = {
+Client clients[4] = {
     Client( user::lambda[0], distributions[0], 0 ),
     Client( user::lambda[1], distributions[1], 1 ),
     Client( user::lambda[2], distributions[2], 2 ),

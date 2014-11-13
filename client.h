@@ -32,6 +32,6 @@ public:
 };
 
 /* Static array with all four clients. */
-Client clients[4];
+extern Client clients[4];
 
 #endif // CLIENT_H
