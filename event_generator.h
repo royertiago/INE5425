@@ -18,7 +18,7 @@ struct EventGenerator {
      * description; otherwise, return "". */
     virtual std::string advance( unsigned microseconds ) = 0;
 
-    virtual ~EventGenerator();
+    virtual ~EventGenerator() = default;
 };
 
 #endif // EVENT_GENERATOR_H

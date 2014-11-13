@@ -6,11 +6,11 @@
 #define SERVER_H
 
 #include "event_generator.h"
-#include "measured_queue.h"
+#include "measured_resource.h"
 #include "requisition.h"
 
-class Server { // server process
-    measured_queue queue;
+class Server : public EventGenerator { // server process
+    MeasuredResource queue;
 public:
     virtual ~Server() = default;
 

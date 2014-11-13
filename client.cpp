@@ -3,8 +3,9 @@
  */
 #include <cstdio>
 #include "client.h"
-#include "user.h"
+#include "network.h"
 #include "random.h"
+#include "user_config.h"
 
 int distributions[4][4] = {
     {20, 15, 40, 25},
@@ -29,9 +30,9 @@ Client::Client( double l, int * t, int i ) :
 }
 
 void Client::generate() {
-    next_event_time_us = random::next_requisition_time( lambda );
+    next_event_time_us = Random::next_requisition_time( lambda );
     next_requisition = Requisition::generate_requisition(
-            random::next_requisition_type( type_distribution ) );
+            Random::next_requisition_type( type_distribution ) );
     next_requisition.creation_timestamp += next_event_time_us;
 }
 
@@ -60,7 +61,7 @@ std::string Client::advance( unsigned us ) {
 
 void Client::reset() {
     for( int i = 0; i < 4; i++ ) {
-        clients[i].labda = user::lambda[i];
+        clients[i].lambda = user::lambda[i];
         clients[i].generate();
     }
 }

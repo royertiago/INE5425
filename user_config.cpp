@@ -9,17 +9,17 @@
 
 namespace user {
     double lambda[4] = {30, 60, 120, 120};
-    double response_time[4] = {10, 8, 15, 30};
+    double processing_time[4] = {10, 8, 15, 30};
 
     const static std::map< std::string, double * > var_map = {
-        {"lambda1",   lambda           },
-        {"lambda2",   lambda + 1       },
-        {"lambda3",   lambda + 2       },
-        {"lambda4",   lambda + 3       },
-        {"response1", response_time    },
-        {"response2", response_time + 1},
-        {"response3", response_time + 2},
-        {"response4", response_time + 3},
+        {"lambda1",   lambda             },
+        {"lambda2",   lambda + 1         },
+        {"lambda3",   lambda + 2         },
+        {"lambda4",   lambda + 3         },
+        {"response1", processing_time    },
+        {"response2", processing_time + 1},
+        {"response3", processing_time + 2},
+        {"response4", processing_time + 3},
     };
 
     void read_configuration( const char * filename ) {

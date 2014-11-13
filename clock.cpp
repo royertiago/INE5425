@@ -15,7 +15,7 @@ namespace Clock {
     }
 
     void insert( EventGenerator * generator ) {
-        event_generators->push_back( generator );
+        event_generators.push_back( generator );
     }
 
     std::vector< std::string > advance() {
@@ -42,7 +42,11 @@ namespace Clock {
                     generator->next_event_description()
                 });
         std::sort( event_list.begin(), event_list.end() );
-        return event_list;
+
+        std::vector< std::string > ret_val;
+        for( auto pair : event_list )
+            ret_val.push_back( pair.second );
+        return ret_val;
     }
 };
 

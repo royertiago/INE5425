@@ -2,13 +2,14 @@
  * Implementation of server.h.
  */
 #include <cstdio>
+#include "client.h"
 #include "server.h"
 #include "network.h"
 
 Server processes[2];
 
 void Server::process( Requisition req ) {
-    queue.push( req, req.processing_time );
+    queue.insert( req, req.processing_time );
 }
 
 unsigned int Server::next_event() {
@@ -26,8 +27,7 @@ std::string Server::next_event_description() {
     return std::string( str, str + end );
 }
 
-std::string Requisition::advance( unsigned us ) {
-    if( queue.empty() ) return "";
+std::string Server::advance( unsigned us ) {
     auto pair = queue.advance( us );
     if( pair.first == false ) return "";
 

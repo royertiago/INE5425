@@ -54,8 +54,8 @@ namespace Random {
     }
 
     unsigned next_requisition_type( int * d ) {
-        std::discrete_distribution<unsigned> d( d, d+4 );
-        return d( rng );
+        std::discrete_distribution<unsigned> discrete( d, d+4 );
+        return discrete( rng );
     }
 
     unsigned next_requisition_time( double lambda ) {

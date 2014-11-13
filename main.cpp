@@ -1,10 +1,16 @@
 /* main.cpp */
-#include <stdio.h>
+#include <chrono>
 #include <iostream>
 #include <limits>
+#include <stdio.h>
+#include <thread>
 
-#include "user_config.h"
+#include "client.h"
+#include "clock.h"
+#include "network.h"
 #include "random.h"
+#include "server.h"
+#include "user_config.h"
 
 void readkey() {
     std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
@@ -22,6 +28,14 @@ int main() {
     printf( "Seed: %u\n", user::seed );
 
     // TODO: set the signal handlers
+    Clock::insert( clients );
+    Clock::insert( clients + 1 );
+    Clock::insert( clients + 2 );
+    Clock::insert( clients + 3 );
+    Clock::insert( processes );
+    Clock::insert( processes + 1 );
+    Clock::insert( &client_to_server );
+    Clock::insert( &server_to_client );
 
     std::cout << "Press [ENTER] to begin the simulation.\n"
                  "Hit CTRL-C anytime to stop the simulation.\n"
@@ -30,7 +44,7 @@ int main() {
 
     readkey();
 
-    while( clock::current_time() < time_limit ) {
+    while( Clock::current_time() < time_limit ) {
         for( auto str : Clock::advance() )
             std::cout << str << std::endl;
         // TODO: print statistics summary here, after event generation.

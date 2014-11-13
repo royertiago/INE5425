@@ -24,7 +24,7 @@ public:
     virtual std::string next_event_description() override;
     virtual std::string advance( unsigned microseconds ) override;
 
-    int i() { return index }
+    int i() { return index; }
 
     /* Assign the user-defined lambdas to the client array defined
      * below. */

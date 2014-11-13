@@ -12,26 +12,26 @@
 #include "requisition.h"
 
 class ClientToServer : public EventGenerator {
-    measured_resource queue;
+    MeasuredResource queue;
 public:
     void send( Requisition );
 
     virtual ~ClientToServer() = default;
     virtual unsigned int next_event() override;
     virtual std::string next_event_description() override;
-    virtual bool advance( unsigned microseconds ) override;
-}
+    virtual std::string advance( unsigned microseconds ) override;
+};
 
 class ServerToClient : public EventGenerator {
-    measured_resource queue;
+    MeasuredResource queue;
 public:
     void send( Requisition );
 
     virtual ~ServerToClient() = default;
     virtual unsigned int next_event() override;
     virtual std::string next_event_description() override;
-    virtual bool advance( unsigned microseconds ) override;
-}
+    virtual std::string advance( unsigned microseconds ) override;
+};
 
 extern ServerToClient server_to_client;
 extern ClientToServer client_to_server;

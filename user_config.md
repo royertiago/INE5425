@@ -7,7 +7,7 @@ There are nine values that can be setted by the user:
 -   The RNG seed.
 
 The first four variables are named lambda1, lambda2, lambda3 and lambda4;
-the following four are named response1, response2, respose3 and response4,
+the following four are named processing1, processing2, respose3 and processing4,
 and the seed is simply `seed`.
 
 The values for the variables can be set in file user\_config.txt. The syntax is
@@ -31,14 +31,14 @@ variable.
 Default values
 --------------
 
-|  Variable |         Value         |
-|:----------|----------------------:|
-| lambda1   |                    30 |
-| lambda2   |                    60 |
-| lambda3   |                   120 |
-| lambda4   |                   120 |
-| response1 |                    10 |
-| response2 |                     8 |
-| response3 |                    15 |
-| response4 |                    30 |
-| seed      | based on current time |
+|  Variable   |         Value         |
+|:------------|----------------------:|
+| lambda1     |                    30 |
+| lambda2     |                    60 |
+| lambda3     |                   120 |
+| lambda4     |                   120 |
+| processing1 |                    10 |
+| processing2 |                     8 |
+| processing3 |                    15 |
+| processing4 |                    30 |
+| seed        | based on current time |
