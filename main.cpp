@@ -31,7 +31,8 @@ int main() {
     readkey();
 
     while( clock::current_time() < time_limit ) {
-        std::cout << clock::advance();
+        for( auto str : Clock::advance() )
+            std::cout << str << std::endl;
         // TODO: print statistics summary here, after event generation.
 
         if( step_by_step )

@@ -1,5 +1,8 @@
 /* clock.h
  * Namespace that does the time management.
+ *
+ * Since there is a single global clock, there is no need for classes,
+ * so it is a namespace.
  */
 #ifndef CLOCK_H
 #define CLOCK_H
@@ -16,7 +19,7 @@ namespace Clock {
     void insert( EventGenerator * );
 
     /* Generate the next event. */
-    std::string advance();
+    std::vector< std::string > advance();
 
     /* Generate an ordered list with the next events. */
     std::vector< std::string > next_events();
