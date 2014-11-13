@@ -44,4 +44,29 @@ TEST_CASE( "measurer basic funcionality", "[measurer][statistics]" ) {
         CHECK( m.max() == 300 );
         CHECK( m.average() == Approx(105) );
     }
+
+    SECTION( "different weights" ) {
+        m.insert( 200, 3 );
+        CHECK( m.min() == 100 );
+        CHECK( m.max() == 200 );
+        CHECK( m.average() == Approx(175) );
+
+        m.insert( 40, 2 );
+        CHECK( m.min() == 40 );
+        CHECK( m.max() == 200 );
+        CHECK( m.average() == Approx(130) );
+
+        SECTION( "default values" ) {
+            m.insert( 60 );
+            CHECK( m.min() == 40 );
+            CHECK( m.max() == 200 );
+            CHECK( m.average() == Approx(120) );
+        }
+        SECTION( "specifying 1 as parameter" ) {
+            m.insert( 60, 1 );
+            CHECK( m.min() == 40 );
+            CHECK( m.max() == 200 );
+            CHECK( m.average() == Approx(120) );
+        }
+    }
 }
