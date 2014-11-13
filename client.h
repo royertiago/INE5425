@@ -21,6 +21,10 @@ public:
     virtual unsigned int next_event() override;
     virtual std::string next_event_description() override;
     virtual bool advance( unsigned microseconds ) override;
+
+    /* Assign the user-defined lambdas to the client array defined
+     * below. */
+    static void reset();
 };
 
 /* Static array with all four clients. */

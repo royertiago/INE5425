@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 
-namespace clock {
+namespace Clock {
     long long unsigned current_time();
 
     /* Inserts an event generator in the list of objects that
