@@ -21,5 +21,7 @@ namespace Random {
 
     unsigned next_requisition_type( int * distribution );
     unsigned next_requisition_time( double lambda );
+
+    double network_efficiency();
 }
 #endif // RANCOM_H
