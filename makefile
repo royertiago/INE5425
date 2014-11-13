@@ -9,17 +9,22 @@
 # The name RWINDOWS was chosen to avoid name clashes, because the name WINDOWS
 # seems to be used by some system headers.
 CXX := g++
-CXXFLAGS := -std=c++11 -Wall -Wextra -Werror -g
+CXXFLAGS := -std=c++11 -Wall -Wextra -Werror -g -I./
 WIN32CXX := i686-w64-mingw32-g++
 WIN64CXX := x86_64-w64-mingw32-g++
 WINCXXFLAGS := -std=c++11 -w -static -lgcc -lstdc++ -lpthread -DRWINDOWS
 
 # Variable definitions
-SOURCES := $(shell find -name "*.cpp")
-DEPS	:= $(SOURCES:.cpp=.d)
+SOURCES := $(shell find -path "./Catch" -prune -o -name "*.cpp" \! -name "*.test.cpp" -print)
+TSOURCES:= $(shell find -path "./Catch" -prune -o -name "*.test.cpp" -print)#test sources
+DEPS	:= $(SOURCES:.cpp=.d) $(TSOURCES:.cpp=.d)
 OBJ		:= $(SOURCES:.cpp=.o)
+TOBJ	:= $(TSOURCES:.cpp=.o)
 
-# Avaliable targets:
+# Libraries
+ILIBS	:= -isystem Catch/single_include
+
+# Avaliable (useful) targets: all modelsim win32 win64 test
 
 #	modelsim
 # Default target.
@@ -32,8 +37,9 @@ modelsim: $(OBJ)
 	$(CXX) $(OBJ) -o modelsim
 
 #	all
-# Builds both the host-system executable and the Windows executables.
-all: modelsim win32 win64
+# Builds the host-system executable, the Windows executables
+# and the unit test program.
+all: modelsim win32 win64 test
 
 # 	win32
 # Cross-compiles the 32-bit binary for Windows.
@@ -50,12 +56,28 @@ win64: modelsim-win64.exe
 modelsim-win64.exe: $(SOURCES)
 	$(WIN64CXX) $(WINCXXFLAGS) -o modelsim-win64.exe $(SOURCES)
 
+#	test
+# Compiles the test binary and runs the tests.
+test: test/test
+	test/test
+
+# test binary.
+test/test: $(OBJ) $(TOBJ)
+	$(CXX) $(filter-out ./main.o, $(OBJ)) $(TOBJ) -o test/test
+
 # Object files
 # This script also rewrites the corresponding .d file, so that whenever an object file
 # needs recompilation, the dependency file is updated.
 $(OBJ): %.o : %.cpp
-	$(CXX) $(CXXFLAGS) $(ILIBS) $(FINCLUDE) -c $< -o $@
-	g++ -std=c++0x -MM $< -MF $*.d -MT "$*.o" $(ILIBS)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+	g++ -std=c++0x -MM $< -MF $*.d -MT "$*.o" -I./
+	sed -e 's/^.*://' -e 's/\\//' -e 's/ /\n/g' $*.d | sed -e 's/\(..*\)/\1:/' >> $*.d
+
+# Test object files
+# Additional information to include Catch framework
+$(TOBJ): %.o : %.cpp
+	$(CXX) $(CXXFLAGS) $(ILIBS) -c $< -o $@
+	g++ -std=c++0x -MM $< -MF $*.d -MT "$*.o" -I./ $(ILIBS)
 	sed -e 's/^.*://' -e 's/\\//' -e 's/ /\n/g' $*.d | sed -e 's/\(..*\)/\1:/' >> $*.d
 
 -include $(DEPS)
@@ -67,4 +89,4 @@ clean:
 	-find \( -name "*.o" -or -name "*.d" \) -exec rm '{}' \;
 
 veryclean: clean
-	-rm modelsim modelsim-win32.exe modelsim-win64.exe
+	-rm -f modelsim modelsim-win32.exe modelsim-win64.exe
