@@ -1,13 +1,13 @@
 /* requisition.cpp
  * Implementation of requisition.h
  */
-
+#include <algorithm>
 #include "requisition.h"
 #include "random.h"
 
 unsigned Requisition::alive = 0;
 unsigned Requisition::count = 0;
-unsigned Requisition::minimum_queue_time = 0;
+unsigned Requisition::minimum_queue_time = -1;
 unsigned Requisition::maximum_queue_time = 0;
 long unsigned Requisition::total_queue_time = 0;
 
@@ -44,4 +44,11 @@ Requisition Requisition::generate_requisition( unsigned type ) {
             req.type = "search";
     }
     return req;
+}
+
+void Requisition::dispose( Requisition req ) {
+    minimum_queue_time = std::min( minimum_queue_time, req.queue_time );
+    maximum_queue_time = std::max( maximum_queue_time, req.queue_time );
+    total_queue_time += req.queue_time;
+    alive--;
 }
