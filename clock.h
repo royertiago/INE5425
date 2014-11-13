@@ -9,7 +9,7 @@
 #include <vector>
 
 namespace clock {
-    long unsigned current_time();
+    long long unsigned current_time();
 
     /* Inserts an event generator in the list of objects that
      * need time management. */
