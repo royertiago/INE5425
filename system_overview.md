@@ -8,9 +8,10 @@ Each process answer two types of requisitions.
 Each requisition type has different size, processing time and response size.
 After processing, the response is sent back through the network.
 The network latency is proportional to both the size of the request/response
-being sent and its efficiency,
-plus 1ms of additional processing time;
+being sent and its efficiency, plus 1ms of additional processing time;
 the efficiency is between 60% and 80%, uniformly distributed.
+The network is assumed to be full-duplex; that is, sending requisitions from
+user to server does not affect sending responses from server to user.
 
 Requisitions
 -----------
@@ -49,5 +50,7 @@ Recorded Statistics
     the time spent in each state.
 -   Average resource occupation.
 -   Minimum, maximum and average time that an entity spends in queues.
+    The processing time _is not_ counted as "queue time".
 -   Minimum, maximum and average response time
+    The processing time _is_ counted as "response time".
 -   Count of total entities at current time in the simulation.
