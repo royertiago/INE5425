@@ -34,24 +34,25 @@ void Client::generate() {
     next_requisition = Requisition::generate_requisition(
             Random::next_requisition_type( type_distribution ) );
     next_requisition.creation_timestamp += next_event_time_us;
+    next_requisition.source = this;
 }
 
-unsigned Client::next_event() {
+long long unsigned Client::next_event() {
     return next_event_time_us;
 }
 
 std::string Client::next_event_description() {
     static char buffer[1024];
-    int end = std::sprintf( buffer, "Send %6s requisition of size %4d from client %d\n",
+    int end = std::sprintf( buffer, "Send %6s requisition of size %4d from client %d",
             next_requisition.type, next_requisition.size, index );
     return std::string( buffer, buffer + end );
 }
 
-std::string Client::advance( unsigned us ) {
+std::string Client::advance( long long unsigned us ) {
     next_event_time_us -= us;
     if( next_event_time_us != 0 ) return "";
     static char buffer[1024];
-    int end = std::sprintf( buffer, "Sent %6s requisition of size %4d from client %d to network\n",
+    int end = std::sprintf( buffer, "Sent %6s requisition of size %4d from client %d to network",
             next_requisition.type, next_requisition.size, index );
     
     client_to_server.send( next_requisition );

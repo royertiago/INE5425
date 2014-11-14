@@ -12,7 +12,7 @@ void Server::process( Requisition req ) {
     queue.insert( req, req.processing_time );
 }
 
-unsigned int Server::next_event() {
+long long unsigned int Server::next_event() {
     return queue.next_event();
 }
 
@@ -22,12 +22,12 @@ std::string Server::next_event_description() {
     Requisition req = queue.front();
     static char str[1024];
     int end = std::sprintf( str, "Send back %4d bytes answer to answer a %6s "
-                                 "requisition from client %i\n",
+                                 "requisition from client %i",
                                  req.response_size, req.type, req.source->i() );
     return std::string( str, str + end );
 }
 
-std::string Server::advance( unsigned us ) {
+std::string Server::advance( long long unsigned us ) {
     auto pair = queue.advance( us );
     if( pair.first == false ) return "";
 
@@ -36,7 +36,7 @@ std::string Server::advance( unsigned us ) {
 
     static char str[1024];
     int end = std::sprintf( str, "Sent back %4d bytes answer to answer a %6s "
-                                 "requisition from client %i\n",
+                                 "requisition from client %i",
                                  req.response_size, req.type, req.source->i() );
     return std::string( str, str + end );
 }

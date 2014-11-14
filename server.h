@@ -16,9 +16,9 @@ public:
 
     void process( Requisition );
 
-    virtual unsigned int next_event() override;
+    virtual long long unsigned int next_event() override;
     virtual std::string next_event_description() override;
-    virtual std::string advance( unsigned microseconds ) override;
+    virtual std::string advance( long long unsigned microseconds ) override;
 };
 
 extern Server processes[2];

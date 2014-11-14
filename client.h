@@ -12,7 +12,7 @@ class Client : public EventGenerator {
     int * type_distribution;
     int index;
 
-    unsigned next_event_time_us; // microseconds
+    long long unsigned next_event_time_us; // microseconds
     Requisition next_requisition;
 
     // Generate the next requisition and requisition times.
@@ -20,9 +20,9 @@ class Client : public EventGenerator {
 public:
     Client( double, int *, int );
     virtual ~Client() = default;
-    virtual unsigned int next_event() override;
+    virtual long long unsigned int next_event() override;
     virtual std::string next_event_description() override;
-    virtual std::string advance( unsigned microseconds ) override;
+    virtual std::string advance( long long unsigned microseconds ) override;
 
     int i() { return index; }
 

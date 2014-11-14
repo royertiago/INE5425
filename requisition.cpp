@@ -21,16 +21,19 @@ Requisition Requisition::generate_requisition( unsigned type ) {
             req.response_size = Random::add_response_size();
             req.server_process = 0;
             req.type = "add";
+        break;
         case 1: 
             req.size = 1024;
             req.response_size = Random::delete_response_size();
             req.server_process = 0;
             req.type = "delete";
+        break;
         case 2: 
             req.size = 256;
             req.response_size = Random::find_response_size();
             req.server_process = 1;
             req.type = "find";
+        break;
         default:
             req.size = Random::search_requisition_size();
             req.response_size = Random::search_response_size();

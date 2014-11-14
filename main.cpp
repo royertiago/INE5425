@@ -25,17 +25,18 @@ namespace { // global variables modified by the signal handlers.
 int main() {
     user::read_configuration( "user_config.txt" );
     Random::reset();
+    Client::reset();
     printf( "Seed: %u\n", user::seed );
 
     // TODO: set the signal handlers
+    Clock::insert( &server_to_client ); // Notice the order is important.
+    Clock::insert( processes );
+    Clock::insert( processes + 1 );
+    Clock::insert( &client_to_server );
     Clock::insert( clients );
     Clock::insert( clients + 1 );
     Clock::insert( clients + 2 );
     Clock::insert( clients + 3 );
-    Clock::insert( processes );
-    Clock::insert( processes + 1 );
-    Clock::insert( &client_to_server );
-    Clock::insert( &server_to_client );
 
     std::cout << "Press [ENTER] to begin the simulation.\n"
                  "Hit CTRL-C anytime to stop the simulation.\n"

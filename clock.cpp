@@ -2,6 +2,7 @@
  * Implementation of clock.h.
  */
 #include <algorithm>
+#include <stdio.h>
 #include "clock.h"
 
 namespace {
@@ -20,11 +21,10 @@ namespace Clock {
 
     std::vector< std::string > advance() {
         std::vector< std::string > events;
-        unsigned earlier_time = -1;
+        long long unsigned earlier_time = -1;
 
         for( auto generator : event_generators )
-            if( generator->next_event() < earlier_time )
-                earlier_time = generator->next_event();
+            earlier_time = std::min( generator->next_event(), earlier_time );
 
         for( auto generator : event_generators ) {
             std::string event = generator->advance( earlier_time );

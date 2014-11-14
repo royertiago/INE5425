@@ -17,9 +17,9 @@ public:
     void send( Requisition );
 
     virtual ~ClientToServer() = default;
-    virtual unsigned int next_event() override;
+    virtual long long unsigned int next_event() override;
     virtual std::string next_event_description() override;
-    virtual std::string advance( unsigned microseconds ) override;
+    virtual std::string advance( long long unsigned microseconds ) override;
 };
 
 class ServerToClient : public EventGenerator {
@@ -28,9 +28,9 @@ public:
     void send( Requisition );
 
     virtual ~ServerToClient() = default;
-    virtual unsigned int next_event() override;
+    virtual long long unsigned int next_event() override;
     virtual std::string next_event_description() override;
-    virtual std::string advance( unsigned microseconds ) override;
+    virtual std::string advance( long long unsigned microseconds ) override;
 };
 
 extern ServerToClient server_to_client;
