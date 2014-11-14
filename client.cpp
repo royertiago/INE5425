@@ -25,9 +25,7 @@ Client::Client( double l, int * t, int i ) :
     lambda( l ),
     type_distribution( t ),
     index( i )
-{
-    generate();
-}
+{}
 
 void Client::generate() {
     next_event_time_us = Random::next_requisition_time( lambda );
@@ -61,6 +59,8 @@ std::string Client::advance( long long unsigned us ) {
 }
 
 void Client::reset() {
+    Requisition::count -= 4;
+    Requisition::alive -= 4;
     for( int i = 0; i < 4; i++ ) {
         clients[i].lambda = user::lambda[i];
         clients[i].generate();

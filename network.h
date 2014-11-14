@@ -11,9 +11,8 @@
 #include "measured_resource.h"
 #include "requisition.h"
 
-class ClientToServer : public EventGenerator {
+struct ClientToServer : public EventGenerator {
     MeasuredResource queue;
-public:
     void send( Requisition );
 
     virtual ~ClientToServer() = default;
@@ -22,9 +21,8 @@ public:
     virtual std::string advance( long long unsigned microseconds ) override;
 };
 
-class ServerToClient : public EventGenerator {
+struct ServerToClient : public EventGenerator {
     MeasuredResource queue;
-public:
     void send( Requisition );
 
     virtual ~ServerToClient() = default;

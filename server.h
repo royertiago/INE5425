@@ -9,9 +9,8 @@
 #include "measured_resource.h"
 #include "requisition.h"
 
-class Server : public EventGenerator { // server process
+struct Server : public EventGenerator { // server process
     MeasuredResource queue;
-public:
     virtual ~Server() = default;
 
     void process( Requisition );

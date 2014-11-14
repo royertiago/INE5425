@@ -14,7 +14,7 @@ Requisition Requisition::generate_requisition( unsigned type ) {
     alive++;
     count++;
     req.creation_timestamp = Clock::current_time();
-    req.processing_time = user::processing_time[type];
+    req.processing_time = user::processing_time[type] * 1000;
     switch( type ) {
         case 0:
             req.size = 1024;

@@ -2,6 +2,7 @@
 #include <atomic>
 #include <chrono>
 #include <csignal>
+#include <iomanip>
 #include <iostream>
 #include <limits>
 #include <cstdio>
@@ -25,8 +26,8 @@ namespace { // global variables modified by the signal handlers.
     volatile std::atomic_bool interrupt;
 }
 
-void print_time() {
-    auto ms = Clock::current_time() / 1000;
+void print_time( long long unsigned time ) {
+    auto ms = time / 1000;
     auto min = ms / 1000 / 60;
     ms %= 60*1000;
     auto sec = ms / 1000;
@@ -34,8 +35,59 @@ void print_time() {
     std::cout << min << "min" << sec << "s" << ms << "ms";
 }
 
-void print_short_statistics() {
-    // TODO
+void print_partial_statistics() {
+    std::cout << "---------- Partial statistics ----------\n";
+    std::cout << Requisition::alive << " requisitions and responses currently in the system\n";
+    std::cout << "Queues - min/max/avg/current\n";
+    std::cout << "Network - Client to Server - " << client_to_server.queue.entities
+              << "/" << client_to_server.queue.current_queue() << std::endl;
+    std::cout << "Network - Server to Client - " << server_to_client.queue.entities
+              << "/" << server_to_client.queue.current_queue() << std::endl;
+    std::cout << "Server process 1 - " << processes[0].queue.entities
+              << "/" << processes[0].queue.current_queue() << std::endl;
+    std::cout << "Server process 2 - " << processes[1].queue.entities
+              << "/" << processes[1].queue.current_queue() << std::endl;
+
+    std::cout << "Resource ocupation - respectively, "
+              << std::setprecision( 2 )
+              << 100 * client_to_server.queue.occupancy_rate() << "% / "
+              << std::setprecision( 2 )
+              << 100 * server_to_client.queue.occupancy_rate() << "% / "
+              << std::setprecision( 2 )
+              << 100 * processes[0].queue.occupancy_rate() << "% / "
+              << std::setprecision( 2 )
+              << 100 * processes[1].queue.occupancy_rate() << "%\n";
+
+    std::cout << "Response times: min/avg/max ms - " << response_times << std::endl << std::endl;
+}
+
+void print_final_statistics() {
+    std::cout << "---------- Full statistics report ----------\n";
+    std::cout << Requisition::alive << " requisitions and responses currently in the system.\n";
+    std::cout << Requisition::count << " total requisitions and responses.\n";
+    std::cout << "Queue sizes - min/avg/max\n";
+    std::cout << "Network - Client to Server - " << client_to_server.queue.entities << std::endl;
+    std::cout << "Network - Server to Client - " << server_to_client.queue.entities << std::endl;
+    std::cout << "Server process 1 - " << processes[0].queue.entities << std::endl;
+    std::cout << "Server process 2 - " << processes[1].queue.entities << std::endl;
+
+    std::cout << "Queue waiting times - min/avg/max ms\n";
+    std::cout << "Network - Client to Server - " << client_to_server.queue.delays << std::endl;
+    std::cout << "Network - Server to Client - " << server_to_client.queue.delays << std::endl;
+    std::cout << "Server process 1 - " << processes[0].queue.delays << std::endl;
+    std::cout << "Server process 2 - " << processes[1].queue.delays << std::endl;
+
+    std::cout << "Resource ocupation - respectively, "
+              << std::setprecision( 2 )
+              << 100 * client_to_server.queue.occupancy_rate() << "% / "
+              << std::setprecision( 2 )
+              << 100 * server_to_client.queue.occupancy_rate() << "% / "
+              << std::setprecision( 2 )
+              << 100 * processes[0].queue.occupancy_rate() << "% / "
+              << std::setprecision( 2 )
+              << 100 * processes[1].queue.occupancy_rate() << "%\n";
+
+    std::cout << "Response times: min/avg/max ms - " << response_times << std::endl;
 }
 
 void signal_handler( int ) {
@@ -49,22 +101,38 @@ void signal_handler( int ) {
 void handle_interruption() {
     interrupt = 0;
     char op;
+    print_partial_statistics();
     std::cout << "--------------------------------------------------------------------\n";
     std::cout << "Type any of the following:\n";
-    std::cout << "l <number of seconds>     [change the execution time limit]\n";
+    std::cout << "f                         [print full statistics report]\n";
     std::cout << "i <miliseconds>           [change screen update interval]\n";
-    std::cout << "s                         [toggle step-by-step run]\n";
+    std::cout << "l <number of seconds>     [change the execution time limit]\n";
+    std::cout << "n                         [print next events]\n";
     std::cout << "q                         [quit the program]\n";
     std::cout << "r                         [resume the simulation]\n";
+    std::cout << "s                         [toggle step-by-step run]\n";
     /* Windows can't do both signal handling and input reading. */
     bool resume = false;
     while( !resume ) {
         op = std::cin.get();
         switch( op ) {
-            case 'q': exit(0);
+            case 'q': 
+                print_final_statistics();
+                readkey();
+                exit(0);
+                
+            case 'f':
+                print_final_statistics();
+                break;
 
-            case 'r': resume = true;
-                      break;
+            case 'r':
+                resume = true;
+                break;
+
+            case 'n':
+                for( auto str : Clock::next_events() )
+                    std::cout << str << std::endl;
+                break;
 
             case 'l': {
                 double secs;
@@ -135,10 +203,10 @@ int main() {
             handle_interruption();
 
         for( auto str : Clock::advance() ) {
-            print_time();
+            print_time( Clock::current_time() );
             std::cout << " " << str << std::endl;
         }
-        print_short_statistics();
+        print_partial_statistics();
 
         if( step_by_step ) {
             char op = std::cin.get();
@@ -154,6 +222,8 @@ int main() {
     }
 
     std::cout << "End of simulation.\n";
+
+    print_final_statistics();
 
     std::cout << "\nPress [ENTER] to exit the system...";
     readkey();

@@ -2,6 +2,8 @@
  * Implementation of measurer.h.
  */
 #include <algorithm>
+#include <iomanip>
+#include <iostream>
 #include "measurer.h"
 
 double measurer::average() const {
@@ -14,4 +16,10 @@ void measurer::insert( unsigned long long value, unsigned long long weight ) {
     _max = std::max( _max, value );
     _sum += value * weight;
     _weight_sum += weight;
+}
+
+std::ostream & operator<<( std::ostream& os, const measurer& m ) {
+    return os << m._min/1000 << "/"
+        << std::setprecision(2) << m.average()/1000
+        << "/" << m._max/1000;
 }

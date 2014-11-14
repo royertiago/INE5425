@@ -10,6 +10,8 @@
 #ifndef MEASURER_H
 #define MEASURER_H
 
+#include <iosfwd>
+
 class measurer {
     unsigned long long _min = -1;
     unsigned long long _max = 0;
@@ -23,6 +25,8 @@ public:
     unsigned long long min() const { return _min; }
     unsigned long long max() const { return _max; }
     double average() const;
+
+    friend std::ostream& operator<<( std::ostream&, const measurer& );
 };
 
 #endif // MEASURER_H
