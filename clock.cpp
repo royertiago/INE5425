@@ -7,7 +7,7 @@
 
 namespace {
     std::vector< EventGenerator * > event_generators;
-    long long unsigned current_time = 0;
+    volatile long long unsigned current_time = 0;
 }
 
 namespace Clock {

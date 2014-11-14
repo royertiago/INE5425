@@ -10,8 +10,8 @@
 # seems to be used by some system headers.
 CXX := g++
 CXXFLAGS := -std=c++11 -Wall -Wextra -Werror -g -I./
-WIN32CXX := i686-w64-mingw32-g++
-WIN64CXX := x86_64-w64-mingw32-g++
+WIN32CXX := i686-w64-mingw32-g++ -O0
+WIN64CXX := x86_64-w64-mingw32-g++ -O0
 WINCXXFLAGS := -std=c++11 -w -static -lgcc -lstdc++ -lpthread -DRWINDOWS
 
 # Variable definitions
