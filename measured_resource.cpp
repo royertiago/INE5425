@@ -39,3 +39,8 @@ std::pair< bool, Requisition > MeasuredResource::advance( long long unsigned tim
 
     return pair;
 }
+
+int MeasuredResource::current_queue() const {
+    if( queue.size() <= 1 ) return 0;
+    return queue.size() - 1;
+}

@@ -54,6 +54,7 @@ public:
     int    max_delay()        const { return delays.max();        }
     double average_delay()    const { return delays.average();    }
     double occupancy_rate()   const { return occupancy.average(); }
+    int    current_queue()    const; // queue size
 };
 
 #endif //  MEASURED_RESOURCE_H
