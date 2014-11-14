@@ -12,7 +12,7 @@ ClientToServer client_to_server;
 measurer response_times;
 
 void ClientToServer::send( Requisition req ) {
-    long long unsigned time = req.size * 5 / Random::network_efficiency();
+    long long unsigned time = req.size * 5 / Random::network_efficiency() + 1000;
     //printf( "ClientToServer::send() (this %p, time %llu), next_event %llu, ", (void*) this, time, queue.next_event() );
 //    queue.insert( req, req.size * 5 / Random::network_efficiency() );
     queue.insert( req, time );
@@ -20,7 +20,7 @@ void ClientToServer::send( Requisition req ) {
 }
 
 void ServerToClient::send( Requisition req ) {
-    queue.insert( req, req.response_size * 5 / Random::network_efficiency() );
+    queue.insert( req, req.response_size * 5 / Random::network_efficiency() + 1000 );
 }
 
 long long unsigned ClientToServer::next_event() {

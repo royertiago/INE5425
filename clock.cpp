@@ -31,6 +31,8 @@ namespace Clock {
             if( event != "" ) events.push_back( event );
         }
 
+        ::current_time += earlier_time;
+
         return events;
     }
 
