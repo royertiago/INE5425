@@ -19,7 +19,14 @@ namespace Random {
     unsigned search_response_size();
     unsigned search_requisition_size();
 
+    /* Generate a random requisition type, based with the first
+     * four values in of the passed pointer. For example, if
+     * the first four values are
+     *  10  20  50  30
+     * then the likehood of the value 0 to be generated is 10%,
+     * the likehood of 1 is 20% and so on. */
     unsigned next_requisition_type( int * distribution );
+
     unsigned next_requisition_time( double lambda );
 
     double network_efficiency();

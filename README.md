@@ -1,4 +1,4 @@
-INE5425 - Modelagem e Simulação
+INE5425 - Modeling and Simulation
 =========================================================
 
 Development of a simulator in a general-purpose language,
@@ -9,7 +9,14 @@ to the INE5425 (Modeling and Simulation) discipline.
 Running
 =======
 
-TODO
+The program comes with precompiled binaries for Windows 32 bits
+and Windows 64 bits; just do a double-click on the appropriate
+one and its done.
+
+To run in a POSIX-compliant system, see section Building below.
+
+The user manual can be found in manual.pdf; more details in
+user-definable data can be found in user\_config.md.
 
 
 

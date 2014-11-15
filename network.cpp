@@ -12,11 +12,7 @@ ClientToServer client_to_server;
 measurer response_times;
 
 void ClientToServer::send( Requisition req ) {
-    long long unsigned time = req.size * 5 / Random::network_efficiency() + 1000;
-    //printf( "ClientToServer::send() (this %p, time %llu), next_event %llu, ", (void*) this, time, queue.next_event() );
-//    queue.insert( req, req.size * 5 / Random::network_efficiency() );
-    queue.insert( req, time );
-    //printf( "next event %llu\n", queue.next_event() );
+    queue.insert( req, req.response_size * 5 / Random::network_efficiency() + 1000 );
 }
 
 void ServerToClient::send( Requisition req ) {
@@ -24,7 +20,6 @@ void ServerToClient::send( Requisition req ) {
 }
 
 long long unsigned ClientToServer::next_event() {
-    //printf( "ClientToServer::next_event() (this %p)-> %llu\n", (void*)this, queue.next_event() );
     return queue.next_event();
 }
 
@@ -33,7 +28,6 @@ long long unsigned ServerToClient::next_event() {
 }
 
 std::string ClientToServer::next_event_description() {
-    //printf( "ClientToServer::next_event_description() (%llu)\n", queue.next_event() );
     if( queue.next_event() == -1llu ) return "";
     static char str[1024];
     Requisition req = queue.front();
@@ -52,7 +46,6 @@ std::string ServerToClient::next_event_description() {
 }
 
 std::string ClientToServer::advance( long long unsigned us ) {
-    //printf( "ClientToServer::advance(%llu) (this %p) - Next event = %llu\n", us, (void*)this, queue.next_event() );
     auto pair = queue.advance( us );
     if( pair.first == false ) return "";
 
